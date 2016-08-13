@@ -13,3 +13,6 @@
 [submodule "database-api"]
 	path = database-api
 	url = https://github.com/mcosand/sar-database-api
+[submodule "esar-missionline"]
+	path = esar-missionline
+	url = https://github.com/kcesar/missionline
