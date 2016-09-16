@@ -7,12 +7,6 @@
 [submodule "full-database"]
 	path = full-database
 	url = https://github.com/mcosand/kcsara-database
-[submodule "auth"]
-	path = auth
-	url = https://github.com/mcosand/sar-auth
-[submodule "database-api"]
-	path = database-api
-	url = https://github.com/mcosand/sar-database-api
 [submodule "esar-missionline"]
 	path = esar-missionline
 	url = https://github.com/kcesar/missionline
