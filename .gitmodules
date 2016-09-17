@@ -1,12 +1,6 @@
-[submodule "esar-training"]
-	path = esar-training
-	url = https://github.com/kcesar/trainingapp
 [submodule "common"]
 	path = common
 	url = https://github.com/mcosand/sar-common
 [submodule "full-database"]
 	path = full-database
 	url = https://github.com/mcosand/kcsara-database
-[submodule "esar-missionline"]
-	path = esar-missionline
-	url = https://github.com/kcesar/missionline
