@@ -20,7 +20,12 @@ IF %ERRORLEVEL% NEQ 0 (
 
 setlocal enabledelayedexpansion
 
-SET ARTIFACTS=%~dp0%..\artifacts
+IF EXIST %~dp0%artifacts (
+  SET ARTIFACTS=%~dp0%artifacts
+) ELSE (
+  SET ARTIFACTS=%~dp0%..\artifacts
+)
+echo Using ARTIFACTS path %ARTIFACTS%
 
 IF NOT DEFINED DEPLOYMENT_SOURCE (
   SET DEPLOYMENT_SOURCE=%~dp0%.
