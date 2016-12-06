@@ -80,8 +80,10 @@ IF /I "sar-sites.sln" NEQ "" (
 
 :: 2. Build to the temporary path
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
-  call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\full-database\ESAR.Extensions\ESAR.Extensions.csproj" /nologo /verbosity:m /t:Build /p:Configuration=Release;UseSharedCompilation=false /p:SolutionDir="%DEPLOYMENT_SOURCE%\.\\" %SCM_BUILD_ARGS%
-  call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\full-database\SMR.Extensions\SMR.Extensions.csproj" /nologo /verbosity:m /t:Build /p:Configuration=Release;UseSharedCompilation=false /p:SolutionDir="%DEPLOYMENT_SOURCE%\.\\" %SCM_BUILD_ARGS%
+  call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\kcsara-extensions\ESAR.Extensions\ESAR.Extensions.csproj" /nologo /verbosity:m /t:Build /p:Configuration=Release;UseSharedCompilation=false /p:SolutionDir="%DEPLOYMENT_SOURCE%\.\\" %SCM_BUILD_ARGS%
+  call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\kcsara-extensions\SAR-IST.Extensions\SAR-IST.Extensions.csproj" /nologo /verbosity:m /t:Build /p:Configuration=Release;UseSharedCompilation=false /p:SolutionDir="%DEPLOYMENT_SOURCE%\.\\" %SCM_BUILD_ARGS%
+  call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\kcsara-extensions\SMR.Extensions\SMR.Extensions.csproj" /nologo /verbosity:m /t:Build /p:Configuration=Release;UseSharedCompilation=false /p:SolutionDir="%DEPLOYMENT_SOURCE%\.\\" %SCM_BUILD_ARGS%
+  call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\kcsara-extensions\SPART.Extensions\SPART.Extensions.csproj" /nologo /verbosity:m /t:Build /p:Configuration=Release;UseSharedCompilation=false /p:SolutionDir="%DEPLOYMENT_SOURCE%\.\\" %SCM_BUILD_ARGS%
   call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\full-database\src\website\website.csproj" /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:PublishProfile=Release /p:_PackageTempDir="%DEPLOYMENT_TEMP%";AutoParameterizationWebConfigConnectionStrings=false;Configuration=Release;UseSharedCompilation=false /p:SolutionDir="%DEPLOYMENT_SOURCE%\.\\" %SCM_BUILD_ARGS%
 ) ELSE (
   call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\full-database\src\website\website.csproj" /nologo /verbosity:m /t:Build /p:PublishProfile=Release /p:AutoParameterizationWebConfigConnectionStrings=false;Configuration=Release;UseSharedCompilation=false /p:SolutionDir="%DEPLOYMENT_SOURCE%\.\\" %SCM_BUILD_ARGS%
@@ -93,8 +95,10 @@ IF !ERRORLEVEL! NEQ 0 goto error
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_TEMP%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
   IF !ERRORLEVEL! NEQ 0 goto error
-  copy /y "%DEPLOYMENT_SOURCE%\full-database\SMR.Extensions\bin\Release\*.Extensions.dll" "%DEPLOYMENT_TARGET%\bin"
-  copy /y "%DEPLOYMENT_SOURCE%\full-database\ESAR.Extensions\bin\Release\*.Extensions.dll" "%DEPLOYMENT_TARGET%\bin"
+  copy /y "%DEPLOYMENT_SOURCE%\kcsara-extensions\ESAR.Extensions\bin\Release\*.Extensions.dll" "%DEPLOYMENT_TARGET%\bin"
+  copy /y "%DEPLOYMENT_SOURCE%\kcsara-extensions\SAR-IST.Extensions\bin\Release\*.Extensions.dll" "%DEPLOYMENT_TARGET%\bin"
+  copy /y "%DEPLOYMENT_SOURCE%\kcsara-extensions\SMR.Extensions\bin\Release\*.Extensions.dll" "%DEPLOYMENT_TARGET%\bin"
+  copy /y "%DEPLOYMENT_SOURCE%\kcsara-extensions\SPART.Extensions\bin\Release\*.Extensions.dll" "%DEPLOYMENT_TARGET%\bin"
 )
 
 :: 4. Bower Install

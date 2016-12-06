@@ -4,3 +4,6 @@
 [submodule "full-database"]
 	path = full-database
 	url = https://github.com/mcosand/kcsara-database
+[submodule "kcsara-extensions"]
+	path = kcsara-extensions
+	url = https://github.com/mcosand/kcsara-db-extensions.git
