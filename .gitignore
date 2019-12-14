@@ -2,3 +2,9 @@
 /packages
 /emails
 /artifacts
+
+obj/
+bin/
+*.local.json
+log-*.txt
+PublishProfiles/
