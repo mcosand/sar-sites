@@ -39,6 +39,7 @@ namespace Kcsara.Database.Api
       services.AddSingleton<ITrainingRecordsService, TrainingRecordsService>();
       services.AddSingleton<ITrainingCoursesService, TrainingCoursesService>();
       services.AddSingleton<IMembersService, MembersService>();
+      services.AddSingleton<IEventsService, EventsService>();
 
       CoreExtensionsProvider ext = new CoreExtensionsProvider();
       services.AddSingleton<IExtensionProvider>(ext);
@@ -48,6 +49,13 @@ namespace Kcsara.Database.Api
       services.AddSingleton<Func<IKcsarContext>>(() => new KcsarContext(Configuration["store:connectionString"]));
       services.AddSingleton(s => log4net.LogManager.GetLogger("some log"));
       services.AddSingleton<IHost, CoreHost>();
+
+      string blobConnectionString = Configuration["store:blob:connectionString"];
+      string blobContainer = Configuration["store:blob:container"];
+      if (!string.IsNullOrWhiteSpace(blobConnectionString) && !string.IsNullOrWhiteSpace(blobContainer))
+      {
+        services.AddSingleton<IBlobStorage>(new AzureBlobStorage(blobConnectionString, blobContainer));
+      }
 
       JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
       services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

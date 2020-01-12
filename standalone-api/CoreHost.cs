@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Sar;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace Kcsara.Database.Api
 {
@@ -25,7 +21,7 @@ namespace Kcsara.Database.Api
 
     public bool FileExists(string relativePath)
     {
-      throw new NotImplementedException();
+      return File.Exists(relativePath);
     }
 
     public string GetConfig(string key)
@@ -35,7 +31,7 @@ namespace Kcsara.Database.Api
 
     public Stream OpenFile(string relativePath)
     {
-      throw new NotImplementedException();
+      return File.OpenRead(relativePath);
     }
   }
 }
