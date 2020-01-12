@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.2.0" />
     <PackageReference Include="EntityFramework" Version="6.1.3" />
     <PackageReference Include="log4net" Version="2.0.5" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
@@ -29,6 +30,12 @@
   <ItemGroup>
     <ProjectReference Include="..\common\src\database-api-client\database-api-client.csproj" />
     <ProjectReference Include="..\full-database\src\database-services\database-services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="nophoto.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
